@@ -31,3 +31,24 @@ exports.login = async (req, res) => {
     }
 };
 
+exports.register = async (req, res) => {
+    const { name, email, password } = req.body;
+
+    const ress = await userService.register(name,email,password)
+
+    if(ress?.success){
+        res.send({
+            success: true,
+            message: ress?.message,
+            data: ress?.data,
+            token: ress?.data?.token
+        });
+    } else {
+         res.send({
+            success: false,
+            message: ress?.message,
+            data: null,
+            token: ""
+        });
+    }
+}
