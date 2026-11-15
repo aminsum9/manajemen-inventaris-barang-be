@@ -1,4 +1,5 @@
 const express = require('express');
+const { authenticated } = require('./middleware/auth');
 
 const app = express();
 
@@ -9,7 +10,7 @@ app.use(express.json());
 
 // routers
 app.use('/api/user', userRouter);
-app.use('/api/items', productRouter);
+app.use('/api/items',authenticated, productRouter);
 
 const PORT = 5000;
 
