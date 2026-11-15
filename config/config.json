@@ -1,23 +1,28 @@
 {
   "development": {
-    "username": "macbookpro",
+    "username": "user",
     "password": null,
     "database": "db_inventaris_barang",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
-    "username": "macbookpro",
+    "username": "user",
     "password": null,
     "database": "db_inventaris_barang",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
-    "username": "macbookpro",
+    "username": "user",
     "password": null,
     "database": "db_inventaris_barang",
     "host": "127.0.0.1",
     "dialect": "postgres"
+  },
+  "docker": {
+    "dialect": "postgres",
+    "use_env_variable": "DATABASE_URL",
+    "logging": false
   }
 }
