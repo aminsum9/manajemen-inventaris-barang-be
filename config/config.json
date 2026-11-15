@@ -1,20 +1,20 @@
 {
   "development": {
-    "username": "user",
+    "username": "root",
     "password": null,
     "database": "db_inventaris_barang",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
-    "username": "user",
+    "username": "root",
     "password": null,
     "database": "db_inventaris_barang",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
-    "username": "user",
+    "username": "root",
     "password": null,
     "database": "db_inventaris_barang",
     "host": "127.0.0.1",

@@ -1,0 +1,11 @@
+const productRepository = require('../repositories/product');
+
+exports.add = async (name, desc, stock, price) => {
+    if(stock < 0){
+        return {data: null, success: false, message: "Product stock cannot be negative!"}
+    }
+
+    const ress = await productRepository.add(name, desc, stock, price)
+
+    return ress
+}
