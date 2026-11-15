@@ -9,3 +9,9 @@ exports.add = async (name, desc, stock, price) => {
 
     return ress
 }
+
+exports.get = async (page,limit,keyword) => {
+    const ress = await productRepository.get(page,limit,keyword)
+
+    return ress
+}

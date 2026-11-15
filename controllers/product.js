@@ -6,15 +6,27 @@ exports.add = async (req, res) => {
     const stock = req.body.stock;
     const price = req.body.price;
 
-    if (!name || typeof name != "string") {
-        res.status(500).json({
-            success: false,
-            message: 'name is required!'
-        });
-        return;
-    }
-
     const ress = await productService.add(name,desc,stock,price)
+
+    if(ress.success){
+        res.send({
+            success: true,
+            message: 'success',
+            data: ress?.data,
+        });
+    } else {
+         res.send({
+            success: false,
+            message: ress?.message,
+            data: null,
+        });
+    }
+};
+
+exports.get = async (req, res) => {
+    const { page,limit,keyword } = req.query;
+
+    const ress = await productService.get(page,limit,keyword)
 
     if(ress.success){
         res.send({
