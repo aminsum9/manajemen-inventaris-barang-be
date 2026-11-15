@@ -15,3 +15,9 @@ exports.get = async (page,limit,keyword) => {
 
     return ress
 }
+
+exports.delete = async (id) => {
+    const ress = await productRepository.delete(id)
+
+    return ress
+}

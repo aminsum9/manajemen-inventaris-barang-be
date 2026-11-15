@@ -11,7 +11,7 @@ exports.add = async (req, res) => {
     if(ress.success){
         res.send({
             success: true,
-            message: 'success',
+            message: ress?.message,
             data: ress?.data,
         });
     } else {
@@ -31,7 +31,27 @@ exports.get = async (req, res) => {
     if(ress.success){
         res.send({
             success: true,
-            message: 'success',
+            message: ress?.message,
+            data: ress?.data,
+        });
+    } else {
+         res.send({
+            success: false,
+            message: ress?.message,
+            data: null,
+        });
+    }
+};
+
+exports.delete = async (req, res) => {
+    const { id } = req.params;
+
+    const ress = await productService.delete(id)
+
+    if(ress.success){
+        res.send({
+            success: true,
+            message: ress?.message,
             data: ress?.data,
         });
     } else {

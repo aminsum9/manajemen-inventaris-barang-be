@@ -43,7 +43,7 @@ exports.get = async (page = 1, limit = 10, keyword = "") => {
         }
 
         if (keyword) {
-            options.where = { name: { [Op.like]: "%"+keyword+"%" } }
+            options.where = { name: { [Op.like]: "%" + keyword + "%" } }
         }
 
         const { docs, pages, total } = await Product.paginate(options)
@@ -69,3 +69,31 @@ exports.get = async (page = 1, limit = 10, keyword = "") => {
         }
     }
 };
+
+exports.delete = async (id) => {
+    return Product.findOne({ where: { id: id } }).then(ress => {
+        if (!ress) {
+            return {
+                data: null,
+                success: false,
+                message: 'Product not found!',
+            }
+        } else {
+            return Product.destroy({ where: { id: id } }).then(ress => {
+                if (ress) {
+                    return {
+                        data: null,
+                        success: true,
+                        message: 'Product deleted.',
+                    }
+                } else {
+                    return {
+                        data: null,
+                        success: false,
+                        message: 'Failed to delete product!',
+                    }
+                }
+            })
+        }
+    })
+}

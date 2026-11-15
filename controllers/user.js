@@ -17,7 +17,7 @@ exports.login = async (req, res) => {
     if(ress.success){
         res.send({
             success: true,
-            message: 'success',
+            message: ress?.message,
             data: ress?.data,
             token: ress?.token
         });
