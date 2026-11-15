@@ -16,6 +16,16 @@ exports.get = async (page,limit,keyword) => {
     return ress
 }
 
+exports.update = async (id,name, desc, stock, price) => {
+    if(stock < 0){
+        return {data: null, success: false, message: "Product stock cannot be negative!"}
+    }
+
+    const ress = await productRepository.update(id,name, desc, stock, price)
+
+    return ress
+}
+
 exports.delete = async (id) => {
     const ress = await productRepository.delete(id)
 

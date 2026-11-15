@@ -70,6 +70,52 @@ exports.get = async (page = 1, limit = 10, keyword = "") => {
     }
 };
 
+exports.update = async (id, name, desc, stock, price) => {
+    return Product.update({
+        name: name,
+        desc: desc,
+        stock: stock,
+        price: price,
+    }, { where: { id: id } })
+        .then((data) => {
+            if (data) {
+                return Product.findOne({
+                    where: { id: id },
+                    attributes: {
+                        exclude: ['updatedAt', 'createdAt'],
+                    }
+                }).then(data => {
+                    if (data) {
+                        return {
+                            data: data,
+                            success: true,
+                            message: 'Update product successfully.',
+                        };
+                    } else {
+                        return {
+                            data: null,
+                            success: false,
+                            message: 'Update product failed!'
+                        };
+                    }
+                })
+            } else {
+                return {
+                    data: null,
+                    success: false,
+                    message: 'Update product failed!'
+                };
+            }
+        })
+        .catch((error) => {
+            return {
+                data: null,
+                success: false,
+                message: 'Update product failed: ' + error?.message
+            };
+        });
+};
+
 exports.delete = async (id) => {
     return Product.findOne({ where: { id: id } }).then(ress => {
         if (!ress) {

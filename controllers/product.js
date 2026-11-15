@@ -43,6 +43,31 @@ exports.get = async (req, res) => {
     }
 };
 
+exports.update = async (req, res) => {
+    const { id } = req.params;
+    
+    const name = req.body.name;
+    const desc = req.body.desc;
+    const stock = req.body.stock;
+    const price = req.body.price;
+
+    const ress = await productService.update(id,name,desc,stock,price)
+
+    if(ress.success){
+        res.send({
+            success: true,
+            message: ress?.message,
+            data: ress?.data,
+        });
+    } else {
+         res.send({
+            success: false,
+            message: ress?.message,
+            data: null,
+        });
+    }
+};
+
 exports.delete = async (req, res) => {
     const { id } = req.params;
 
