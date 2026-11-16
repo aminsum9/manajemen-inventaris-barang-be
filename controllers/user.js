@@ -22,13 +22,13 @@ exports.login = async (req, res) => {
             maxAge: 24 * 60 * 60 * 1000
         });
 
-        res.send({
+        res.status(200).send({
             success: true,
             message: ress?.message,
             data: ress?.data,
         });
     } else {
-         res.send({
+         res.status(400).send({
             success: false,
             message: ress?.message,
             data: null,
@@ -49,13 +49,13 @@ exports.register = async (req, res) => {
             maxAge: 24 * 60 * 60 * 1000
         });
 
-        res.send({
+        res.status(200).send({
             success: true,
             message: ress?.message,
             data: ress?.data,
         });
     } else {
-         res.send({
+         res.status(400).send({
             success: false,
             message: ress?.message,
             data: null,
