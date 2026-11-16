@@ -17,24 +17,24 @@ exports.login = (email, password) => {
                     Users.update({ token: token }, { where: { email: email } });
 
                     return {
+                        success: true,
+                        message: 'login successfully',
                         data: {
                             id: data.id,
                             name: data.name,
                             email: data.email,
-                            token: token
                         },
-                        success: true,
-                        message: 'login successfully'
+                        token: token,
                     }
                 } else {
-                    return { data: null, success: false, message: 'password is invalid!' }
+                    return { data: null, success: false, message: 'password is invalid!', token: "" }
                 }
             } else {
-                return { data: null, success: false, message: 'email is invalid!' }
+                return { data: null, success: false, message: 'email is invalid!', token: "" }
             }
         })
         .catch((error) => {
-            return { data: null, success: false, message: 'Error: ' + error?.message }
+            return { data: null, success: false, message: 'Error: ' + error?.message, token: "" }
         });
 };
 
@@ -56,7 +56,7 @@ exports.register = async (name, email, password) => {
             if (data) {
                 const token = jwt.sign({ id: data.id }, process.env.SECRET_TOKER);
                 Users.update({ token: token }, { where: { email: email } });
-                
+
                 return {
                     success: true,
                     message: 'Register user successfully',
@@ -64,19 +64,25 @@ exports.register = async (name, email, password) => {
                         id: data.id,
                         name: data.name,
                         email: data.email,
-                        token: token
                     },
+                    token: token
                 }
             } else {
                 return {
                     data: null,
                     success: false,
-                    message: 'Register failed!'
+                    message: 'Register failed!',
+                    token: ""
                 }
             }
         });
 
     } catch (error) {
-        return { data: null, success: false, message: "Register failed:" + error?.message }
+        return {
+            data: null,
+            success: false,
+            message: "Register failed:" + error?.message,
+            token: ""
+        }
     }
 };

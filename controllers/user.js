@@ -15,18 +15,23 @@ exports.login = async (req, res) => {
     const ress = await userService.login(email,password)
 
     if(ress.success){
+        res.cookie("token", ress?.token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "lax",
+            maxAge: 24 * 60 * 60 * 1000
+        });
+
         res.send({
             success: true,
             message: ress?.message,
             data: ress?.data,
-            token: ress?.token
         });
     } else {
          res.send({
             success: false,
             message: ress?.message,
             data: null,
-            token: ""
         });
     }
 };
@@ -37,18 +42,23 @@ exports.register = async (req, res) => {
     const ress = await userService.register(name,email,password)
 
     if(ress?.success){
+        res.cookie("token", ress?.token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "lax",
+            maxAge: 24 * 60 * 60 * 1000
+        });
+
         res.send({
             success: true,
             message: ress?.message,
             data: ress?.data,
-            token: ress?.data?.token
         });
     } else {
          res.send({
             success: false,
             message: ress?.message,
             data: null,
-            token: ""
         });
     }
 }

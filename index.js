@@ -1,4 +1,5 @@
 const express = require('express');
+const cookieParser = require("cookie-parser");
 const { authenticated } = require('./middleware/auth');
 
 const app = express();
@@ -7,6 +8,7 @@ const userRouter = require('./routers/user');
 const productRouter = require('./routers/product');
 
 app.use(express.json());
+app.use(cookieParser());
 
 // routers
 app.use('/api/user', userRouter);

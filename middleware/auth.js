@@ -2,17 +2,22 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 exports.authenticated = (req, res, next) => {
-	let authHeader = req.headers['authorization'];
+	const token = req.cookies?.token;
 
-	if (!authHeader) {
-		res.status(403).send({ message: 'Need header.' });
+	if (!token) {
+		res.status(403).send({ 
+			success: false,
+			message: 'Authentication failed: need token!' 
+		});
 		return;
 	}
-	let token = authHeader.split('Bearer ')[1];
 
 	jwt.verify(token, process.env.SECRET_TOKER, (err, decoded) => {
 		if (err) {
-			return res.status(403).send({ message: 'Your Token is Longer Valid' });
+			return res.status(403).send({ 
+				success: false,
+				message: 'Your Token is Longer Valid' 
+			});
 		}
 
 		userId = decoded.id;
