@@ -4,7 +4,7 @@ Requirement
 Cara menjalankan aplikasi
 1. Jalankan perintah berikut untuk menjalankan aplikasi menggunakan docker: docker compose up -d --build
 2. Jalankan perintah berikut untuk migrasi database ke postgres docker: docker compose exec app npx sequelize-cli db:migrate
-3. Jika berhasil aplikasi backend sudah bisa dites menggunakan postman dengan mengimport terlebih dahulu file export postman
+3. Jika berhasil aplikasi backend sudah bisa dites menggunakan postman dengan mengimport terlebih dahulu file export "Manajemen Inventaris Barang.postman_collection.json" yang berada di folder postman pada project ini
 4. Untuk menghentikan container gunakan perintah: docker compose down
 5. Untuk menghentikan sekaligus menghapus data database pada docker: docker compose down -v
 
